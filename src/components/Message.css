@@ -1,0 +1,25 @@
+.message {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.bubble {
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+.message.you .bubble {
+  background: #dcf8c6;
+  align-self: flex-end;
+}
+.message.bot .bubble {
+  background: white;
+  border: 1px solid #eee;
+  align-self: flex-start;
+}
+.sender {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}

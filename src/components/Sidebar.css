@@ -1,0 +1,22 @@
+.sidebar {
+  width: 260px;
+  background: #242424;
+  color: white;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.sidebar h2 {
+  margin-top: 0;
+}
+.sidebar nav ul,
+.sidebar .recent-chats ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar li {
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+.sidebar li:hover {
+  text-decoration: underline;
+}
