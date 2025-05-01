@@ -1,52 +1,68 @@
-import React, { useState } from 'react';
-import Sidebar from './components/Sidebar';
-import ChatWindow from './components/ChatWindow';
-import ChatInput from './components/ChatInput';
-import './App.css';
-import { API } from "aws-amplify";
-import { v4 as uuid } from "uuid";  // npm install uuid
+// src/App.jsx
+import React, { useState, useRef } from "react";
+import { v4 as uuid } from "uuid";
+import awsExports from "./aws-exports";
 
+// UI Components
+import Sidebar from "./components/Sidebar";
+import ChatWindow from "./components/ChatWindow";
+import ChatInput from "./components/ChatInput";
+
+import "./App.css";
 
 export default function App() {
+  // 1) chat messages state
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Welcome to Teachify AI! How can I help today?' }
+    { from: "bot", text: "Welcome to Teachify AI! Ask me anything.", id: uuid() },
   ]);
+
+  // 2) one sessionId per browser session
+  const sessionId = useRef(uuid());
+
+  // 3) discover your API Gateway endpoint from aws-exports.js
+  const chatApi = awsExports.aws_cloud_logic_custom?.find(
+    (api) => api.name === "ChatAPI"
+  );
+  const endpoint = chatApi?.endpoint;
 
   const handleSend = async (text) => {
-  if (!text.trim()) return;
+    if (!text.trim() || !endpoint) return;
 
-  // 1️⃣ Push the user’s message into state immediately
-  setMessages((msgs) => [
-    ...msgs,
-    { from: "you", text, id: uuid() }
-  ]);
+    // add user bubble immediately
+    setMessages((msgs) => [
+      ...msgs,
+      { from: "you", text, id: uuid() },
+    ]);
 
-  // 2️⃣ Prepare your payload
-  const payload = {
-    userId:    "currentUser",        // swap in real userId (e.g. from Auth)
-    sessionId: sessionIdRef.current, // could be a ref or state you generated at chat start
-    text
+    // prepare payload
+    const payload = {
+      sessionId: sessionId.current,
+      userId:    "anon-user", // or pull from your auth provider
+      text,
+    };
+
+    try {
+      const res = await fetch(`${endpoint}/chat`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      const { message } = await res.json();
+
+      // add bot bubble
+      setMessages((msgs) => [
+        ...msgs,
+        { from: "bot", text: message, id: uuid() },
+      ]);
+    } catch (err) {
+      console.error("Chat error:", err);
+      setMessages((msgs) => [
+        ...msgs,
+        { from: "bot", text: "⚠️ Oops, something went wrong." , id: uuid()},
+      ]);
+    }
   };
-
-  try {
-    // 3️⃣ Call your backend
-    const resp = await API.post("ChatAPI", "/chat", { body: payload });
-    const botReply = resp.message; // { message: "…" }
-
-    // 4️⃣ Append the bot’s reply
-    setMessages((msgs) => [
-      ...msgs,
-      { from: "bot", text: botReply, id: uuid() }
-    ]);
-  } catch (err) {
-    console.error("Error sending message:", err);
-    setMessages((msgs) => [
-      ...msgs,
-      { from: "bot", text: "❌ Sorry, something went wrong." }
-    ]);
-  }
-};
-
 
   return (
     <div className="app-container">
