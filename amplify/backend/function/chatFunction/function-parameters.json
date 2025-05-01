@@ -16,16 +16,16 @@
       "environmentVariableName": "KNOWLEDGE_BASE_ID"
     },
     {
-      "cloudFormationParameterName": "bedrockModelId",
-      "environmentVariableName": "BEDROCK_MODEL_ID"
-    },
-    {
       "cloudFormationParameterName": "temperature",
       "environmentVariableName": "TEMPERATURE"
     },
     {
       "cloudFormationParameterName": "maxTokens",
       "environmentVariableName": "MAX_TOKENS"
+    },
+    {
+      "cloudFormationParameterName": "bedrockModelId",
+      "environmentVariableName": "BEDROCK_MODEL_ID"
     }
   ]
 }

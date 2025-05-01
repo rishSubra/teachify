@@ -18,11 +18,11 @@
       "function": {
         "chatFunction": {
           "deploymentBucketName": "amplify-teachify-dev-b6646-deployment",
-          "s3Key": "amplify-builds/chatFunction-2b396d303477482f7174-build.zip",
+          "s3Key": "amplify-builds/chatFunction-64344e75715941736532-build.zip",
           "knowledgeBaseId": "S5BBZ9NZSY",
-          "bedrockModelId": "us.amazon.nova-lite-v1:0",
           "temperature": "0.7",
-          "maxTokens": "512"
+          "maxTokens": "512",
+          "bedrockModelId": "amazon.nova-lite-v1:0"
         }
       },
       "api": {

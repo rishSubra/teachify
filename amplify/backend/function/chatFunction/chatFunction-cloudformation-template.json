@@ -31,13 +31,13 @@
     "knowledgeBaseId": {
       "Type": "String"
     },
-    "bedrockModelId": {
-      "Type": "String"
-    },
     "temperature": {
       "Type": "String"
     },
     "maxTokens": {
+      "Type": "String"
+    },
+    "bedrockModelId": {
       "Type": "String"
     }
   },
@@ -106,14 +106,14 @@
             "KNOWLEDGE_BASE_ID": {
               "Ref": "knowledgeBaseId"
             },
-            "BEDROCK_MODEL_ID": {
-              "Ref": "bedrockModelId"
-            },
             "TEMPERATURE": {
               "Ref": "temperature"
             },
             "MAX_TOKENS": {
               "Ref": "maxTokens"
+            },
+            "BEDROCK_MODEL_ID": {
+              "Ref": "bedrockModelId"
             }
           }
         },
