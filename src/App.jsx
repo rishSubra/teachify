@@ -3,6 +3,9 @@ import Sidebar from './components/Sidebar';
 import ChatWindow from './components/ChatWindow';
 import ChatInput from './components/ChatInput';
 import './App.css';
+import { API } from "aws-amplify";
+import { v4 as uuid } from "uuid";  // npm install uuid
+
 
 export default function App() {
   const [messages, setMessages] = useState([
@@ -10,19 +13,40 @@ export default function App() {
   ]);
 
   const handleSend = async (text) => {
-    if (!text.trim()) return;
-    // append user message
-    setMessages((msgs) => [...msgs, { from: 'you', text }]);
+  if (!text.trim()) return;
 
-    // TODO: call your backend (Amplify) with `text` and await reply
-    // const reply = await API.post('chatApi', '/messages', { body: { message: text } });
-    // setMessages((msgs) => [...msgs, { from: 'bot', text: reply }]);
+  // 1️⃣ Push the user’s message into state immediately
+  setMessages((msgs) => [
+    ...msgs,
+    { from: "you", text, id: uuid() }
+  ]);
 
-    // For now, echo stub:
-    setTimeout(() => {
-      setMessages((msgs) => [...msgs, { from: 'bot', text: '🤖 This is a stubbed response.' }]);
-    }, 500);
+  // 2️⃣ Prepare your payload
+  const payload = {
+    userId:    "currentUser",        // swap in real userId (e.g. from Auth)
+    sessionId: sessionIdRef.current, // could be a ref or state you generated at chat start
+    text
   };
+
+  try {
+    // 3️⃣ Call your backend
+    const resp = await API.post("ChatAPI", "/chat", { body: payload });
+    const botReply = resp.message; // { message: "…" }
+
+    // 4️⃣ Append the bot’s reply
+    setMessages((msgs) => [
+      ...msgs,
+      { from: "bot", text: botReply, id: uuid() }
+    ]);
+  } catch (err) {
+    console.error("Error sending message:", err);
+    setMessages((msgs) => [
+      ...msgs,
+      { from: "bot", text: "❌ Sorry, something went wrong." }
+    ]);
+  }
+};
+
 
   return (
     <div className="app-container">

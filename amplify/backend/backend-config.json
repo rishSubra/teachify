@@ -1,0 +1,92 @@
+{
+  "api": {
+    "chatAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "chatFunction"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "chatFunction": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "ChatMessages"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_chatFunction_bedrockModelId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_chatFunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_chatFunction_knowledgeBaseId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_chatFunction_maxTokens": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_chatFunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_chatFunction_temperature": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "chatFunction"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "ChatMessages": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}

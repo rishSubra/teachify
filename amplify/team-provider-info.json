@@ -1,0 +1,33 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-teachify-dev-b6646-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381491977447:role/amplify-teachify-dev-b6646-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381491977447:role/amplify-teachify-dev-b6646-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-teachify-dev-b6646-deployment",
+      "UnauthRoleName": "amplify-teachify-dev-b6646-unauthRole",
+      "StackName": "amplify-teachify-dev-b6646",
+      "StackId": "arn:aws:cloudformation:us-east-1:381491977447:stack/amplify-teachify-dev-b6646/b1ab20d0-268a-11f0-9082-0affce28c5ab",
+      "AmplifyAppId": "d3vt6h1dwhcvj"
+    },
+    "categories": {
+      "storage": {
+        "ChatMessages": {}
+      },
+      "function": {
+        "chatFunction": {
+          "deploymentBucketName": "amplify-teachify-dev-b6646-deployment",
+          "s3Key": "amplify-builds/chatFunction-2b396d303477482f7174-build.zip",
+          "knowledgeBaseId": "S5BBZ9NZSY",
+          "bedrockModelId": "us.amazon.nova-lite-v1:0",
+          "temperature": "0.7",
+          "maxTokens": "512"
+        }
+      },
+      "api": {
+        "chatAPI": {}
+      }
+    }
+  }
+}

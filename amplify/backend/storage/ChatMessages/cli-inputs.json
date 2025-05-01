@@ -1,0 +1,14 @@
+{
+  "resourceName": "ChatMessages",
+  "tableName": "ChatMessages",
+  "partitionKey": {
+    "fieldName": "sessionId",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "createdAt",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

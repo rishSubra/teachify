@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "storage": {
+      "ChatMessages": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "knowledgeBaseId",
+      "environmentVariableName": "KNOWLEDGE_BASE_ID"
+    },
+    {
+      "cloudFormationParameterName": "bedrockModelId",
+      "environmentVariableName": "BEDROCK_MODEL_ID"
+    },
+    {
+      "cloudFormationParameterName": "temperature",
+      "environmentVariableName": "TEMPERATURE"
+    },
+    {
+      "cloudFormationParameterName": "maxTokens",
+      "environmentVariableName": "MAX_TOKENS"
+    }
+  ]
+}
