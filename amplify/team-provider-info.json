@@ -18,7 +18,7 @@
       "function": {
         "chatFunction": {
           "deploymentBucketName": "amplify-teachify-dev-b6646-deployment",
-          "s3Key": "amplify-builds/chatFunction-64344e75715941736532-build.zip",
+          "s3Key": "amplify-builds/chatFunction-6f394c355a2b356b4c37-build.zip",
           "knowledgeBaseId": "S5BBZ9NZSY",
           "temperature": "0.7",
           "maxTokens": "512",

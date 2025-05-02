@@ -28,10 +28,11 @@ const MAX_TOKENS = parseInt(process.env.MAX_TOKENS)    || 512;
 
 // CORS headers for local dev; change origin to '*' or your prod URL as needed
 const CORS_HEADERS = {
-  "Access-Control-Allow-Origin":  "http://localhost:5173",
+  "Access-Control-Allow-Origin":  "*",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Methods": "OPTIONS,POST"
 };
+
 
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
